@@ -1,0 +1,5 @@
+1 - figura 22.2 com vértice inicial 1
+2 - figura 22.2 com vértice inicial 3
+3 - versão orientada da figura 22.3 com vértice inicial s
+4 - versão orientada da figura 22.3 com vértice inicial v
+5 - figura 22.8 com vértice inicial z (z não tem adjacentes) 

@@ -1,0 +1,5 @@
+1 - figura 22.7 a
+2 - figura 22.8
+3 - figura 22.9 c
+4 - grafo sem arestas
+5 - grafo em forma de lista

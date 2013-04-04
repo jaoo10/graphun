@@ -1,0 +1,5 @@
+1 - figura 22.4
+2 - Exemplo da wikipedia - https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
+3 - o grafo é uma árvore, ou seja o grafo é a própria árvore geradora
+4 - figura 22.3, todas as arestas com o mesmo peso
+5 - um exemplo qualquer
