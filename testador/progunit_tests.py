@@ -85,5 +85,12 @@ class ReporterTest(unittest.TestCase):
         self.assertEqual(3, reporter.total)
         self.assertEqual(2, reporter.success)
 
+class TestTimeStr(unittest.TestCase):
+    def test(self):
+        self.assertEquals('123ms', time_str(123))
+        self.assertEquals('1s 123ms', time_str(1123))
+        self.assertEquals('1m 5s', time_str(65123))
+        self.assertEquals('1h 3m', time_str(3789123))
+
 if __name__ == '__main__':
     unittest.main()

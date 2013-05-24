@@ -3,6 +3,7 @@
 import sys
 import codecs
 import traceback
+from time import time
 
 class ProgramResult(object):
     def __init__(self, retcode, out, err):
@@ -16,10 +17,13 @@ class TestCase(object):
         self.description = description
         self.program = program
         self.check = check
+        self.stopwatch = Stopwatch()
 
     def run(self):
         try:
+            self.stopwatch.start()
             program_result = self.program()
+            program_result.time = self.stopwatch.elapsed()
             test_result = TestResult(self, program_result)
             self.check(test_result, program_result)
             return test_result
@@ -104,13 +108,18 @@ class SimpleReporter(Reporter):
         self.logfile = logfile
         self._out = out
         self._log = codecs.open(logfile, "w", "utf-8")
+        self.stopwatch = Stopwatch()
+
+    def start(self):
+        self.stopwatch.start()
+
+    def end(self):
+        elapsed = time_str(self.stopwatch.elapsed())
+        self._write(u'Total: %d  Errors: %d (%s)\n' % (self.total, self.total - self.success, elapsed))
 
     def start_test(self, test_case):
         super(SimpleReporter, self).start_test(test_case)
         self._write(test_case.description + ": ")
-
-    def end(self):
-        self._write(u"Total: %d  Errors: %d\n" % (self.total, self.total - self.success))
 
     def _write(self, s):
         self._write_out(s)
@@ -129,7 +138,7 @@ class SimpleReporter(Reporter):
         self._out.flush()
 
     def _on_success(self, test_case, test_result):
-        self._write("OK\n")
+        self._write("OK (%s)\n" % time_str(test_result.program_result.time))
 
     def _on_failure(self, test_case, test_result):
         self._write_out("Fail (see '%s' file)\n" % self.logfile)
@@ -147,6 +156,36 @@ class SimpleReporter(Reporter):
                 self._write_log(u"Expected: " + unicode(error.expected) + "\n", level = 3)
                 self._write_log(u"Result  : " + unicode(error.actual) + "\n", level = 3)
 
+
+# Stopwatch
+
+class Stopwatch(object):
+    def __init__(self):
+        self.start()
+
+    def start(self):
+        self._started = time()
+
+    def elapsed(self):
+        self._elapsed = time() - self._started
+        return int(1000 * self._elapsed)
+
+def units(value, prefix, last_prefix):
+    r = []
+    for factor, symbol in prefix:
+        d = value % factor
+        value = value / factor
+        r.append((d, symbol))
+        if value == 0:
+            break
+    if value != 0:
+        r.append((value, last_prefix))
+    return r
+
+def time_str(value):
+    r = units(value, [(1000, 'ms'), (60,  's'), (60,  'm'), (60,  'h')], 'd')
+    r = list(reversed(r))[:2]
+    return ' '.join(['%d%s' % (v, u) for v, u in r])
 
 # utilities
 def exec_program(cmd):
