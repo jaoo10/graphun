@@ -192,7 +192,7 @@ def exec_program(cmd):
     from subprocess import Popen, PIPE
     p = Popen(cmd, stdout=PIPE, stderr=PIPE)
     out, err = p.communicate()
-    return ProgramResult(p.returncode, out, err)
+    return ProgramResult(p.returncode, out.decode('utf-8'), err.decode('utf-8'))
 
 def create_program(cmd):
     def run():

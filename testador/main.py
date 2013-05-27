@@ -36,10 +36,10 @@ def main():
     algs, progs_path, cases_path = sys.argv[1:]
     algs = algs.split("|")
     validade_algs(algs)    
-    progs = find_programs(progs_path)
+    progs = find_programs(progs_path.decode('utf-8'))
     validade_progs(progs)
     progs = build_programs(progs)
-    test_cases = create_test_cases(progs, algs, cases_path)
+    test_cases = create_test_cases(progs, algs, cases_path.decode('utf-8'))
     run_test_cases(test_cases)
 
 def show_usage():
@@ -74,7 +74,7 @@ def build_programs(progs):
 def create_test_cases(progs, algs, cases_path):
     m = max(len(algs) for alg in algs) - 1
     def desc(prog, alg, case):
-        return " ".join([prog, alg.ljust(m), case])
+        return u" ".join([prog, alg.ljust(m), case])
     tests = []
     for alg in algs:
         validador = get_validador(alg)
