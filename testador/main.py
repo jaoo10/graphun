@@ -135,4 +135,8 @@ def replace_ext(path, new_ext):
 
 # main body
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print
+        print u'Interrompido'
