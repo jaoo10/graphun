@@ -2,4 +2,9 @@
 2 - Exemplo da wikipedia - https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
 3 - o grafo é uma árvore, ou seja o grafo é a própria árvore geradora
 4 - figura 22.3, todas as arestas com o mesmo peso
-5 - um exemplo qualquer
+5 - grafo roda (wheel graph) com 8 vértices
+6 - grafo roda (wheel graph) com 10000 vértices
+7 - grafo roda (wheel graph) com 20000 vértices
+8 - grafo roda (wheel graph) com 40000 vértices
+9 - grafo roda (wheel graph) com 80000 vértices
+a - grafo roda (wheel graph) com 160000 vértices

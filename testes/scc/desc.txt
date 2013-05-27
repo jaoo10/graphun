@@ -3,3 +3,7 @@
 3 - figura 22.8 (cada vértice em uma componente separada)
 4 - figura 22.2 b
 5 - figura 22.2 b com arestas (1, 3), (5, 6) e (6, 1) - todos os vértices em uma mesma componente
+6 - árvore binária completa com altura 14 (32767 vértices)
+7 - árvore binária completa com altura 15 (65535 vértices)
+8 - árvore binária completa com altura 16 (131071 vértices)
+9 - árvore binária completa com altura 17 (262143 vértices)
