@@ -12,25 +12,24 @@ class UndirectedGraph:
     def __init__(self, V, E):
         self.V = V
         self.E = E
-
-    def _adj(self, u):
-        for x, y, w in self.E:
-            if u == x:
-                yield y, w
-            elif u == y:
-                yield x, w
+        self._cost = {}
+        self._adj = {}
+        for u in self.V:
+            self._adj[u] = set()
+        for u, v, w in self.E:
+            self._cost[(u, v)] = w
+            self._cost[(v, u)] = w
+            self._adj[u].add(v)
+            self._adj[v].add(u)
 
     def adj(self, u):
-        for v, w in self._adj(u):
-            yield v
+        return self._adj[u]
 
     def cost(self, u, v):
-        for x, w in self._adj(u):
-            if v == x:
-                return w
+        return self._cost[(u, v)]
 
     def is_adj(self, u, v):
-        return v in self.adj(u)
+        return (u, v) in self._cost
 
 def parse_tgf(lines, G = Graph):
     def edge(u, v, w = None):
@@ -38,7 +37,7 @@ def parse_tgf(lines, G = Graph):
     sharp = lines.index('#')
     V = lines[:sharp]
     edges = [line.split() for line in lines[sharp + 1:]]
-    E = [edge(*e) for e in edges]
+    E = set(edge(*e) for e in edges)
     return G(V, E)
 
 def parse_tgf_undirected(lines):

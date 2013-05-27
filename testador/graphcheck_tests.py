@@ -45,13 +45,13 @@ class ParseTgfTest(TestCase):
         g = parse_tgf(self.tgf)
         self.assertIsInstance(g, Graph)
         self.assertEqual(['1', '2', '3'], g.V)
-        self.assertEqual([('1', '2', 10), ('3', '2', None)], g.E)
+        self.assertEqual(set([('1', '2', 10), ('3', '2', None)]), g.E)
 
     def test_parse_pgf_undirect(self):
         g = parse_tgf_undirected(self.tgf)
         self.assertIsInstance(g, UndirectedGraph)
         self.assertEqual(['1', '2', '3'], g.V)
-        self.assertEqual([('1', '2', 10), ('3', '2', None)], g.E)
+        self.assertEqual(set([('1', '2', 10), ('3', '2', None)]), g.E)
 
 
 class FakeTestResult(object):
