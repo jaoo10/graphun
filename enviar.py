@@ -99,7 +99,7 @@ def main():
         sys.exit(1)
 
     dis = read_ints(u"Código da disciplina: ", 1)[0]
-    ras = read_ints(u"RA(s): ")
+    ras = read_ints(u"RA(s) [separados por espaço]: ")
     print
 
     digest = md5digest(conteudo)
