@@ -1,10 +1,10 @@
 PYTHON=python2.7 -B
 
-.PHONY: testar testar-bfs testar-ts testar-scc testar-mst atualizar
+.PHONY: testar testar-bfs testar-ts testar-scc testar-bf testar-bfall testa-dk testar-dkall testar-fw testar-mst atualizar
 
 testar:
 	@echo "** Testando todos **"
-	@$(PYTHON) testador/main.py "bfs|ts|scc|mst" src/ testes/
+	@$(PYTHON) testador/main.py "bfs|scc|bf|dk|bfall|dkall|fw" src/ testes/
 
 testar-bfs:
 	@echo "** Testando bfs **"
@@ -17,6 +17,26 @@ testar-ts:
 testar-scc:
 	@echo "** Testando scc **"
 	@$(PYTHON) testador/main.py scc src/ testes/
+
+testar-bf:
+	@echo "** Testando bf **"
+	@$(PYTHON) testador/main.py bf src/ testes/
+
+testar-bfall:
+	@echo "** Testando bfall **"
+	@$(PYTHON) testador/main.py bfall src/ testes/
+
+testar-dk:
+	@echo "** Testando dk **"
+	@$(PYTHON) testador/main.py dk src/ testes/
+
+testar-dkall:
+	@echo "** Testando dkall **"
+	@$(PYTHON) testador/main.py dkall src/ testes/
+
+testar-fw:
+	@echo "** Testando fw **"
+	@$(PYTHON) testador/main.py fw src/ testes/
 
 testar-mst:
 	@echo "** Testando mst **"
