@@ -9,10 +9,15 @@ from progunit import *
 from graphcheck import *
 
 VALIDADORS = { 
-    "bfs" : bfs_main,
-    "ts"  : ts_main,
-    "scc" : scc_main,
-    "mst" : mst_main,
+    "bfs"   : bfs_main,
+    "ts"    : ts_main,
+    "scc"   : scc_main,
+    "bf"    : sp_main,
+    "bfall" : sp_main,
+    "dk"    : sp_main,
+    "dkall" : sp_main,
+    "fw"    : sp_main,
+    "mst"   : mst_main,
 }
 
 GRAPH_EXT=".g"
