@@ -1,0 +1,9 @@
+1 - figura 24.4 com vértice inicial s
+2 - figura 24.5 com vértice inicial s
+3 - figura 24.6 com vértice inicial s
+4 - figura 25.1 com vértice inicial 1
+5 - exemplo de https://en.wikipedia.org/wiki/Shortest_path_problem 
+6 - grafo aleatório com 200 vértices e 7948 arestas
+7 - grafo aleatório com 400 vértices e 31907 arestas
+8 - grafo aleatório com 600 vértices e 71398 arestas
+9 - grafo aleatório com 800 vértices e 128094 arestas

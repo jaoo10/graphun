@@ -1,0 +1,13 @@
+1 - figura 24.4
+2 - figura 24.5
+3 - figura 24.6
+4 - figura 25.1
+5 - exemplo de https://en.wikipedia.org/wiki/Shortest_path_problem 
+6 - grafo aleatório de 100 vértices e 174 arestas (esparso)
+7 - grafo aleatório de 200 vértices e 582 arestas (esparso)
+8 - grafo aleatório de 300 vértices e 864 arestas (esparso)
+9 - grafo aleatório de 400 vértices e 1102 arestas (esparso)
+a - grafo aleatório de 100 vértices e 8921 arestas (denso)
+b - grafo aleatório de 200 vértices e 35784 arestas (denso)
+c - grafo aleatório de 300 vértices e 80783 arestas (denso)
+d - grafo aleatório de 400 vértices e 143471 arestas (denso)

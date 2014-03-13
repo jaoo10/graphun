@@ -1,0 +1,8 @@
+6 - mesmo que fw/6.g
+7 - mesmo que fw/7.g
+8 - mesmo que fw/8.g
+9 - mesmo que fw/9.g
+a - mesmo que fw/a.g
+b - mesmo que fw/b.g
+c - mesmo que fw/c.g
+d - mesmo que fw/d.g
