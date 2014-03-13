@@ -2,25 +2,21 @@
 
 from collections import deque
 
-# Representacao de conjuntos, em geral não é eficiente mas é simples
 class Graph:
-    def __init__(self, V, E):
+    def __init__(self, V, E, directed=True):
         self.V = V
         self.E = E
-
-class UndirectedGraph:
-    def __init__(self, V, E):
-        self.V = V
-        self.E = E
+        self.directed = directed
         self._cost = {}
         self._adj = {}
         for u in self.V:
             self._adj[u] = set()
         for u, v, w in self.E:
             self._cost[(u, v)] = w
-            self._cost[(v, u)] = w
             self._adj[u].add(v)
-            self._adj[v].add(u)
+            if not directed:
+                self._cost[(v, u)] = w
+                self._adj[v].add(u)
 
     def adj(self, u):
         return self._adj[u]
@@ -31,17 +27,17 @@ class UndirectedGraph:
     def is_adj(self, u, v):
         return (u, v) in self._cost
 
-def parse_tgf(lines, G = Graph):
+def parse_tgf(lines, directed=True):
     def edge(u, v, w = None):
         return u, v, (int(w) if w != None else None)
     sharp = lines.index('#')
     V = lines[:sharp]
     edges = [line.split() for line in lines[sharp + 1:]]
     E = set(edge(*e) for e in edges)
-    return G(V, E)
+    return Graph(V, E, directed)
 
 def parse_tgf_undirected(lines):
-    return parse_tgf(lines, UndirectedGraph)
+    return parse_tgf(lines, directed=False)
 
 class ParseError(Exception):
     def __init__(self, message):
@@ -155,7 +151,7 @@ def mst_check(test_result, g, expected, actual):
         test_result.add_error(u"não é uma árvore, número de arestas tem que ser |V| - 1",
                              len(g.V) - 1, len(actual))
     else:
-        tree = UndirectedGraph(g.V, [(u, v, None) for u, v in actual])
+        tree = Graph(g.V, [(u, v, None) for u, v in actual], directed=False)
         reachable = find_reachable(tree, actual[0][0])
         V = set(g.V)
         if V != reachable:

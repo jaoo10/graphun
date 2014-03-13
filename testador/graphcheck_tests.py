@@ -2,19 +2,23 @@ import unittest
 from unittest import TestCase
 from graphcheck import *
 
-class UndirectedGraphTest(TestCase):
+class GraphTest(TestCase):
     def setUp(self):
-        self.g = UndirectedGraph([1, 2, 3], [(1, 2, 10), (3, 2, 20)])
+        self.gu = Graph([1, 2, 3], [(1, 2, 10), (3, 2, 20)], directed=False)
+        self.gd = Graph([1, 2, 3], [(1, 2, 10), (3, 2, 20)])
     
     def test_cost(self):
-        g = self.g
+        g = self.gu
         self.assertEqual(10, g.cost(1, 2))
         self.assertEqual(10, g.cost(2, 1))
         self.assertEqual(20, g.cost(2, 3))
         self.assertEqual(20, g.cost(3, 2))
+        g = self.gd
+        self.assertEqual(10, g.cost(1, 2))
+        self.assertEqual(20, g.cost(3, 2))
 
     def test_is_adj(self):
-        g = self.g
+        g = self.gu
         self.assertFalse(g.is_adj(1, 1))
         self.assertTrue (g.is_adj(1, 2))
         self.assertFalse(g.is_adj(1, 3))
@@ -24,11 +28,25 @@ class UndirectedGraphTest(TestCase):
         self.assertFalse(g.is_adj(3, 1))
         self.assertTrue (g.is_adj(3, 2))
         self.assertFalse(g.is_adj(3, 3))
+        g = self.gd
+        self.assertFalse(g.is_adj(1, 1))
+        self.assertTrue (g.is_adj(1, 2))
+        self.assertFalse(g.is_adj(1, 3))
+        self.assertFalse(g.is_adj(2, 1))
+        self.assertFalse(g.is_adj(2, 2))
+        self.assertFalse(g.is_adj(2, 3))
+        self.assertFalse(g.is_adj(3, 1))
+        self.assertTrue (g.is_adj(3, 2))
+        self.assertFalse(g.is_adj(3, 3))
 
     def test_adj(self):
-        g = self.g
+        g = self.gu
         self.assertEqual([2], list(g.adj(1)))
         self.assertEqual([1, 3], list(g.adj(2)))
+        self.assertEqual([2], list(g.adj(3)))
+        g = self.gd
+        self.assertEqual([2], list(g.adj(1)))
+        self.assertEqual([], list(g.adj(2)))
         self.assertEqual([2], list(g.adj(3)))
 
 
@@ -43,13 +61,13 @@ class ParseTgfTest(TestCase):
 
     def test_parse_pgf(self):
         g = parse_tgf(self.tgf)
-        self.assertIsInstance(g, Graph)
+        self.assertTrue(g.directed)
         self.assertEqual(['1', '2', '3'], g.V)
         self.assertEqual(set([('1', '2', 10), ('3', '2', None)]), g.E)
 
     def test_parse_pgf_undirect(self):
         g = parse_tgf_undirected(self.tgf)
-        self.assertIsInstance(g, UndirectedGraph)
+        self.assertFalse(g.directed)
         self.assertEqual(['1', '2', '3'], g.V)
         self.assertEqual(set([('1', '2', 10), ('3', '2', None)]), g.E)
 
@@ -72,8 +90,11 @@ class BfsTest(TestCase):
         self.assertEqual(expected, actual)
 
     def test_bfs_parse_invalid(self):
+        # less values
         self.assertRaises(ParseError, bfs_parse, ['1 2'])
+        # more values
         self.assertRaises(ParseError, bfs_parse, ['1 2 3 4'])
+        # duplicated edge
         self.assertRaises(ParseError, bfs_parse, ['1 2 3', '1 2 4'])
 
     def test_bfs_check_success(self):
@@ -91,9 +112,10 @@ class BfsTest(TestCase):
         bfs_check(test_result, e, {('1', '3') : '2',
                                    ('1', '2') : '1'})
         self.assertEqual(len(test_result.errors), 1)
-        _, e, a = test_result.errors[0]
-        self.assertEqual(e, ['1 2 2', '1 3 1'])
-        self.assertEqual(a, ['1 2 1', '1 3 2'])
+        # check error message
+        _, expected, actual = test_result.errors[0]
+        self.assertEqual(expected, ['1 2 2', '1 3 1'])
+        self.assertEqual(actual, ['1 2 1', '1 3 2'])
 
 
 class TsTest(TestCase):
@@ -151,9 +173,10 @@ class SccTest(TestCase):
 
 class MstTest(TestCase):
     def setUp(self):
-        self.g = UndirectedGraph(['a', 'b', 'c', 'd'],
-                                 [('a', 'b', 3), ('a', 'c', 1), ('a', 'd', 2),
-                                  ('b', 'd', 3), ('c', 'd', 3)])
+        self.g = Graph(['a', 'b', 'c', 'd'],
+                       [('a', 'b', 3), ('a', 'c', 1), ('a', 'd', 2),
+                        ('b', 'd', 3), ('c', 'd', 3)],
+                       directed=False)
         # edges in tree (a, b), (a, c) e (a, d)
         self.weight = 6
 
