@@ -171,6 +171,82 @@ class SccTest(TestCase):
         self.assertEqual(['1 3 5', '2', '4'], a)
 
 
+class SpTest(TestCase):
+    def setUp(self):
+        self.g = Graph(['a', 'b', 'c', 'd', 'e'],
+                       [('a', 'b', 3), ('a', 'c', 1), ('a', 'd', 5),
+                        ('b', 'd', 3), ('c', 'd', 3), ('e', 'a', 2)])
+        self.path = {
+            ('a', 'a') : (['a'], 0),
+            ('a', 'b') : (['a', 'b'], 3),
+            ('a', 'c') : (['a', 'c'], 1),
+            ('a', 'd') : (['a', 'c', 'd'], 4),
+        }
+
+    def test_sp_parse(self):
+        r = sp_parse(['a b c 2', 'c 4'])
+        self.assertEqual({('a', 'c') : (['a', 'b', 'c'], 2),
+                          ('c', 'c') : (['c'], 4)},
+                         r)
+        # less values
+        self.assertRaises(ParseError, sp_parse, ['a'])
+        # repeated
+        self.assertRaises(ParseError, sp_parse, ['a b c d 4', 'a d 2'])
+
+    def test_is_path(self):
+        self.assertTrue(is_path(self.g, ['a']))
+        self.assertTrue(is_path(self.g, ['a', 'b']))
+        self.assertTrue(is_path(self.g, ['a', 'b', 'd']))
+        self.assertFalse(is_path(self.g, ['a', 'c', 'd', 'b']))
+
+    def test_path_cost(self):
+        self.assertEqual(0, path_cost(self.g, ['a']))
+        self.assertEqual(3, path_cost(self.g, ['a', 'b']))
+        self.assertEqual(6, path_cost(self.g, ['a', 'b', 'd']))
+        self.assertEqual(4, path_cost(self.g, ['a', 'c', 'd']))
+
+    def test_sp_check_ok(self):
+        p = dict(self.path)
+        test_result = FakeTestResult()
+        sp_check(test_result, self.g, self.path, p)
+        self.assertTrue(test_result.success())
+
+    def test_sp_check_missing(self):
+        p = dict(self.path)
+        del p[('a', 'a')]
+        test_result = FakeTestResult()
+        sp_check(test_result, self.g, self.path, p)
+        self.assertFalse(test_result.success())
+
+    def test_sp_check_extra(self):
+        p = dict(self.path)
+        p[('a', 'e')] = (['a', 'e'], 2)
+        test_result = FakeTestResult()
+        sp_check(test_result, self.g, self.path, p)
+        self.assertFalse(test_result.success())
+
+    def test_sp_check_not_path(self):
+        p = dict(self.path)
+        p[('a', 'b')] = (['a', 'c', 'b'], 3)
+        test_result = FakeTestResult()
+        sp_check(test_result, self.g, self.path, p)
+        self.assertFalse(test_result.success())
+
+    def test_sp_check_wrong_cost(self):
+        p = dict(self.path)
+        p[('a', 'd')] = (['a', 'c', 'd'], 5)
+        test_result = FakeTestResult()
+        sp_check(test_result, self.g, self.path, p)
+        self.assertFalse(test_result.success())
+
+    def test_sp_check_not_shortest(self):
+        p = dict(self.path)
+        p[('a', 'd')] = (['a', 'd'], 5)
+        test_result = FakeTestResult()
+        sp_check(test_result, self.g, self.path, p)
+        self.assertFalse(test_result.success())
+
+
 class MstTest(TestCase):
     def setUp(self):
         self.g = Graph(['a', 'b', 'c', 'd'],

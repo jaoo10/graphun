@@ -120,6 +120,67 @@ def scc_main(test_result, case, expected, program_result):
     scc_check(test_result, expected, actual)
 
 
+# shortest path
+def sp_parse(lines):
+    paths = {}
+    for line in lines:
+        values = line.split()
+        if len(values) < 2:
+            raise ParseError(u"formatação: linha não tem pelo menos 2 valores: " + line)
+        path = values[:-1]
+        s = path[0]
+        u = path[-1]
+        cost = int(values[-1])
+        if (s, u) in paths:
+            raise ParseError(u"formatação: caminho repetido: " + line)
+        paths[(s, u)] = (path, cost)
+    return paths
+
+def is_path(g, path):
+    for i in range(len(path) - 1):
+        if not g.is_adj(path[i], path[i+1]):
+            return False
+    return True
+
+def path_cost(g, path):
+    cost = 0
+    for i in range(len(path) - 1):
+        cost += g.cost(path[i], path[i+1])
+    return cost
+
+def sp_check(test_result, g, expected, actual):
+    for su in expected:
+        if su not in actual:
+            test_result.add_error(u"caminho não encontrado: " + " ".join(su))
+    for su in actual:
+        if su not in expected:
+            test_result.add_error(u"não deveria ter o caminho: " + " ".join(actual[su][0]))
+
+    if not test_result.success(): return
+
+    for su in actual:
+        path, cost = actual[su]
+        if not is_path(g, path):
+            test_result.add_error(u"não é um caminho: " + " ".join(path))
+        else:
+            c = path_cost(g, path)
+            if c != cost:
+                test_result.add_error(u"custo do caminho '%s' calculado errado" % (" ".join(path)), c, cost)
+            elif cost != expected[su][1]:
+                test_result.add_error(u"caminho não é mínimo'%s'" % (" ".join(path)), expected[su][1], cost)
+
+def sp_main(test_result, case, expected, program_result):
+    g = parse_tgf(readlines(case))
+    expected = sp_parse(readlines(expected))
+    actual = None
+    try:
+        actual = sp_parse(program_result.out.splitlines())
+    except ParseError as e:
+        test_result.add_error(e.message)
+        return
+    sp_check(test_result, g, expected, actual)
+
+
 # minimum spanning tree
 def mst_parse_result(lines):
     tree = [tuple(line.split()) for line in lines]
