@@ -62,7 +62,7 @@ def validade_progs(progs):
     if not progs:
         print u"Nenhum arquivo run executável encontrado."
         print u"Lembre-se de executar o comando 'chmod -f +x src/lang/{run,build}'"
-        print u"onde lang é a linguagens escolhida para implementar o trabalho."
+        print u"onde lang é a linguagem escolhida para implementar o trabalho."
         sys.exit(1)
 
 def build_programs(progs):

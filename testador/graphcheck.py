@@ -237,7 +237,7 @@ def mst_main(test_result, case, expected, program_result):
     mst_check(test_result, g, expected, actual)
 
 
-# utilidades
+# utilities
 def readlines(infile):
     with open(infile) as f:
         return f.read().splitlines()
