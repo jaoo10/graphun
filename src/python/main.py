@@ -4,7 +4,7 @@ import sys
 def abreArquivo():
 	global vertices
 	global arestas
-	arquivo = open(sys.argv[1],"r")
+	arquivo = open(sys.argv[2],"r")
 	arq = arquivo.readlines()
 	arq = [(a.strip()) for a in arq]
 	indice = arq.index("#")
@@ -26,41 +26,43 @@ def buildListaPesos():
 	for a in arestas:
 		listaPesos[(a[0],a[1])] = a[2]
 	
+
 def bfs():
-	listaCores = []
-	listaDist = []
+	listaCores = {}
+	listaDist = {}
 	for v in vertices:
-		listaCores.append('branco')
-		listaDist.append(0)
-	listaCores[0] = 'cinza'
-	listaDist[0] = 0
+		listaCores[v] = 'branco'
+		listaDist[v] = 0
+	listaCores[vertices[0]] = 'cinza'
+	listaDist[vertices[0]] = 0
 	fila = []
 	fila.append(vertices[0])
 	while fila != []:
 		primeiro = fila.pop(0)
 		for v in listaAdj[primeiro]:
-			if listaCores[vertices.index(v)] == 'branco':
-				listaDist[vertices.index(v)] = listaDist[vertices.index(primeiro)] + 1
-				listaCores[vertices.index(v)] = 'cinza'
+			if listaCores[v] == 'branco':
+				listaDist[v] = listaDist[primeiro] + 1
+				listaCores[v] = 'cinza'
 				fila.append(v)
-		listaCores[vertices.index(primeiro)] = 'preto'
+		listaCores[primeiro] = 'preto'
 	printBFS(listaDist)
 
 def printBFS(distancias):
 	for v in vertices:
-		print vertices[0] + ' ' + v + ' ' + str(distancias[vertices.index(v)])
+		if vertices[0] == v:
+			print vertices[0] + ' ' + v + ' ' + str(distancias[v])
+		elif distancias[v] != 0:
+			print vertices[0] + ' ' + v + ' ' + str(distancias[v])
+
 
 
 def main():
-	print "parametros:"
-	for s in sys.argv[1:]:
-		print s
-	print
-	abreArquivo()
-	buildListaAdj()
-	bfs()
+	if sys.argv[1] == 'bfs':
+		abreArquivo()
+		buildListaAdj()
+		bfs()		
 
-
+#
 if __name__ == "__main__":
 	main()
 
