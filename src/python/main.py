@@ -1,5 +1,5 @@
 import sys
- 
+from collections import deque 
 
 def abreArquivo():
 	global vertices
@@ -35,10 +35,11 @@ def bfs():
 		listaDist[v] = 0
 	listaCores[vertices[0]] = 'cinza'
 	listaDist[vertices[0]] = 0
-	fila = []
-	fila.append(vertices[0])
-	while fila != []:
-		primeiro = fila.pop(0)
+	fila = deque()
+#	fila = []
+	fila.appendleft(vertices[0])
+	while fila:
+		primeiro = fila.popleft()
 		for v in listaAdj[primeiro]:
 			if listaCores[v] == 'branco':
 				listaDist[v] = listaDist[primeiro] + 1
