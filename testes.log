@@ -1,10 +1,620 @@
-src/python/run bfs testes/bfs/1.g: OK (31ms)
-src/python/run bfs testes/bfs/2.g: OK (22ms)
-src/python/run bfs testes/bfs/3.g: OK (26ms)
-src/python/run bfs testes/bfs/4.g: OK (24ms)
-src/python/run bfs testes/bfs/5.g: OK (30ms)
-src/python/run bfs testes/bfs/6.g: OK (196ms)
-src/python/run bfs testes/bfs/7.g: OK (356ms)
-src/python/run bfs testes/bfs/8.g: OK (747ms)
-src/python/run bfs testes/bfs/9.g: OK (1s 652ms)
-Total: 9  Errors: 0 (5s 112ms)
+src/python/run bf testes/bf/1.g: Fail
+  ** STDOUT **
+    erro
+    erro
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    ss0
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    tt0
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    xx0
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    yy0
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+    zz0
+    y x s z t y
+    y x s z t x
+    y x s z t s
+    y x s z t z
+    y x s z t t
+  ** STDERR **
+  ** ERRORS **
+    formatação: linha não tem pelo menos 2 valores: erro
+src/python/run bf testes/bf/2.g: Fail
+  ** STDOUT **
+    ss0
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    rr0
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    tt0
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    xx0
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    yy0
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    s r t y x z s
+    s r t y x z r
+    s r t y x z t
+    s r t y x z y
+    s r t y x z x
+    s r t y x z z
+    zz0
+  ** STDERR **
+  ** ERRORS **
+    formatação: linha não tem pelo menos 2 valores: ss0
+src/python/run bf testes/bf/3.g: Fail
+  ** ERRORS **
+    internal error: invalid literal for int() with base 10: 'y'  File "/home/jao/graphun/testador/progunit.py", line 28, in run
+    self.check(test_result, program_result)
+
+  File "testador/main.py", line 104, in check
+    return check_func(test_result, case, expected, program_result)
+
+  File "/home/jao/graphun/testador/graphcheck.py", line 177, in sp_main
+    actual = sp_parse(program_result.out.splitlines())
+
+  File "/home/jao/graphun/testador/graphcheck.py", line 133, in sp_parse
+    cost = int(values[-1])
+
+src/python/run bf testes/bf/4.g: Fail
+  ** STDOUT **
+    erro
+    110
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    220
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    330
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    440
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+    550
+    1 3 2 5 4 1
+    1 3 2 5 4 3
+    1 3 2 5 4 2
+    1 3 2 5 4 5
+    1 3 2 5 4 4
+  ** STDERR **
+  ** ERRORS **
+    formatação: linha não tem pelo menos 2 valores: erro
+src/python/run bf testes/bf/5.g: Fail
+  ** STDOUT **
+    AA0
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    BB0
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    CC0
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    DD0
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    EE0
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    A C B E D F A
+    A C B E D F C
+    A C B E D F B
+    A C B E D F E
+    A C B E D F D
+    A C B E D F F
+    FF0
+  ** STDERR **
+  ** ERRORS **
+    formatação: linha não tem pelo menos 2 valores: AA0
+src/python/run bf testes/bf/6.g: 
