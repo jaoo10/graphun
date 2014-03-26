@@ -66,42 +66,51 @@ def printBFS(distancias):
 			print vertices[0] + ' ' + v + ' ' + str(distancias[v])
 
 
+# Vertices/Arestas > Vertice inicial(fixo) / caminho(lista de vertices) / custo
+# Algoritmo de Bellman-Ford para encontrar caminhos mais curtos.
+# O grafo de entrada e orientado e as arestas tem peso.
+# O vertice de origem s é o primeiro vertice no arquivo de entrada.
+# Para cada vertice v acessivel a partir de s, uma linha deve ser escrita na saida contendo um caminho mais curto de s para v e o custo do caminho.
 def bf():
 # initialize_single_source(G,s)
-	global listaDist
-	listaDist = {}
-	global listaPi
-	listaPi = {}
+	distancias = {}
+	predecessores = {}
 	for v in vertices:
-		listaDist[v] = 0
-		listaPi[v] = []
-	listaDist[vertices[0]] = 0
-#----------------------------------------
-	i = 1
-	if i < len(vertices):
-		for b in arestas:
-			relax(b[0],b[1],listaPesos[b[0],b[1]])
-	for a in arestas:
-		if listaDist[a[1]] > listaDist[a[0]] + listaPesos[a[0],a[1]]:
-			print 'erro'
-	for v in vertices:
-		printBF(listaPi,v)
-
-
-def relax(u,v,w):
-	if listaDist[v] > listaDist[u] + w:
-		listaDist[v] = listaDist[u] + w
-		listaPi[v].append(u)		
-
-def printBF(caminho,vertice):
-	for a in listaDist:
-		if a == vertice:
-			print vertice + vertice + '0'
+		if v == vertices[0]:
+			distancias[v] = 0
 		else:
-			for d in listaDist:
-				print " ".join([str(x) for x in caminho] ) + ' ' + d
-	
+			distancias[v] = float("inf")
+			predecessores[v] = None
+# relax(u,v,w)
+	for i in range(1,len(vertices)-1):
+		for a in arestas:
+			if distancias[a[0]] + listaPesos[a[0],a[1]] < distancias[a[1]]:
+				distancias[a[1]] = distancias[a[0]] + listaPesos[a[0],a[1]]
+				predecessores[a[1]] = a[0]
+# checar para ciclos com peso negativo
+	for a in arestas:
+		if distancias[a[0]] + listaPesos[a[0],a[1]] < distancias[a[1]]:
+			print 'Este grafo contem um ciclo de peso negativo'
+# exibir a saida
+	printBF(distancias,predecessores)
 
+
+# Lista de custos, Lista de predecessores
+# Esta funcao tem como utilidade escrever a saida do BF.
+def printBF(dist,pred):
+	ultimo = vertices[len(vertices)-1]
+	listaPrint = []
+	listaPrint.append(ultimo)
+	for v in vertices:
+		if pred[ultimo] == v:
+			listaPrint.append(v)
+			ultimo = v
+	listaPrint.append(vertices[0])
+	listaPrint.reverse()
+	print listaPrint
+	for p in range(0,(len(listaPrint))):
+		print " ".join([str(x) for x in listaPrint[:p+1]]) + ' ' + str(dist[listaPrint[p]])
+	
 
 def main():
 	if sys.argv[1] == 'bfs':
