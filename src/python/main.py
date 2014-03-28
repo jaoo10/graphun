@@ -69,10 +69,12 @@ def printBFS(distancias):
 # Vertices/Arestas > Vertice inicial(fixo) / caminho(lista de vertices) / custo
 # Algoritmo de Bellman-Ford para encontrar caminhos mais curtos.
 # O grafo de entrada e orientado e as arestas tem peso.
-# O vertice de origem s é o primeiro vertice no arquivo de entrada.
+# O vertice de origem s e o primeiro vertice no arquivo de entrada.
 # Para cada vertice v acessivel a partir de s, uma linha deve ser escrita na saida contendo um caminho mais curto de s para v e o custo do caminho.
 def bf():
 # initialize_single_source(G,s)
+	global predecessores
+	global distancias
 	distancias = {}
 	predecessores = {}
 	for v in vertices:
@@ -92,12 +94,14 @@ def bf():
 		if distancias[a[0]] + listaPesos[a[0],a[1]] < distancias[a[1]]:
 			print 'Este grafo contem um ciclo de peso negativo'
 # exibir a saida
-	printBF(distancias,predecessores)
+	s = vertices[0]
+	for v in vertices:
+		printBF(s,v)
 
 
 # Lista de custos, Lista de predecessores
 # Esta funcao tem como utilidade escrever a saida do BF.
-def printBF(dist,pred):
+"""def printBF(dist,pred):
 	ultimo = vertices[len(vertices)-1]
 	listaPrint = []
 	listaPrint.append(ultimo)
@@ -107,9 +111,19 @@ def printBF(dist,pred):
 			ultimo = v
 	listaPrint.append(vertices[0])
 	listaPrint.reverse()
-	print listaPrint
 	for p in range(0,(len(listaPrint))):
-		print " ".join([str(x) for x in listaPrint[:p+1]]) + ' ' + str(dist[listaPrint[p]])
+		print " ".join([str(x) for x in listaPrint[:p+1]]) + ' ' + str(dist[listaPrint[p]])"""
+
+def printBF(s,v):
+	if v == s:
+		print s,
+	elif (predecessores[v] == None):
+		None
+	else:
+		printBF(s,predecessores[v]),
+		print v,
+		print str(distancias[v])
+
 	
 
 def main():
