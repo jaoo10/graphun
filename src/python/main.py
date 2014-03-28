@@ -97,33 +97,22 @@ def bf():
 	s = vertices[0]
 	for v in vertices:
 		printBF(s,v)
+		if distancias[v] == float("inf"):
+			None
+		else:
+			print(distancias[v])
 
 
-# Lista de custos, Lista de predecessores
+# Lista de custos, Lista de predecessores > caminho / custo
 # Esta funcao tem como utilidade escrever a saida do BF.
-"""def printBF(dist,pred):
-	ultimo = vertices[len(vertices)-1]
-	listaPrint = []
-	listaPrint.append(ultimo)
-	for v in vertices:
-		if pred[ultimo] == v:
-			listaPrint.append(v)
-			ultimo = v
-	listaPrint.append(vertices[0])
-	listaPrint.reverse()
-	for p in range(0,(len(listaPrint))):
-		print " ".join([str(x) for x in listaPrint[:p+1]]) + ' ' + str(dist[listaPrint[p]])"""
-
 def printBF(s,v):
 	if v == s:
 		print s,
-	elif (predecessores[v] == None):
+	elif predecessores[v] == None:
 		None
 	else:
-		printBF(s,predecessores[v]),
+		printBF(s,predecessores[v])
 		print v,
-		print str(distancias[v])
-
 	
 
 def main():
