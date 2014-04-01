@@ -119,6 +119,36 @@ def printBF(s,v):
 	else:
 		printBF(s,predecessores[v])
 		print v,
+
+
+def dfs():
+	global tempo
+	global listaCores
+	listaCores = {}
+	for v in vertices:
+		listaCores[v] = 'branco'
+	tempo = 0
+	for v in vertices:
+		if listaCores[v] == 'branco'
+			dfs_visit(v)
+
+def dfs_visit(u):
+	tempo += 1
+	listaCores[u] = 'cinza'
+	listaTempo = {}
+	for v in vertices:
+		listaTempo[v] = 0
+	listaDist[u] = tempo
+	for v in listaAdj[u]:
+		if listaCores[v] == 'branco':
+			dfs_visit(v)
+	listaCores[u] = 'preto'
+	tempo += 1
+	listaTempo[u] = tempo
+	
+			
+	
+		
 	
 
 def main():
