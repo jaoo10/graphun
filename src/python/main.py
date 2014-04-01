@@ -66,19 +66,19 @@ def printBFS(distancias):
 			print vertices[0] + ' ' + v + ' ' + str(distancias[v])
 
 
-# Vertices/Arestas > Vertice inicial(fixo) / caminho(lista de vertices) / custo
+# Grafo > Vertice inicial / caminho(lista de vertices) / custo
 # Algoritmo de Bellman-Ford para encontrar caminhos mais curtos.
 # O grafo de entrada e orientado e as arestas tem peso.
 # O vertice de origem s e o primeiro vertice no arquivo de entrada.
 # Para cada vertice v acessivel a partir de s, uma linha deve ser escrita na saida contendo um caminho mais curto de s para v e o custo do caminho.
-def bf():
+def bf(s):
 # initialize_single_source(G,s)
 	global predecessores
 	global distancias
 	distancias = {}
 	predecessores = {}
 	for v in vertices:
-		if v == vertices[0]:
+		if v == s:
 			distancias[v] = 0
 		else:
 			distancias[v] = float("inf")
@@ -94,7 +94,6 @@ def bf():
 		if distancias[a[0]] + listaPesos[a[0],a[1]] < distancias[a[1]]:
 			print 'Este grafo contem um ciclo de peso negativo'
 # exibir a saida
-	s = vertices[0]
 	for v in vertices:
 		printBF(s,v)
 		if distancias[v] == float("inf"):
@@ -102,9 +101,16 @@ def bf():
 		else:
 			print(distancias[v])
 
+# Grafo > caminhos
+# Algoritmo bf executado com cada vertice do grafo como origem. 
+# A entrada e a saida tem o mesmo formato do algoritmo bf.
+def bfall():
+	for v in vertices:
+		bf(v)
+
 
 # Lista de custos, Lista de predecessores > caminho / custo
-# Esta funcao tem como utilidade escrever a saida do BF.
+# Esta funcao tem como utilidade escrever a saida do BF/BFall.
 def printBF(s,v):
 	if v == s:
 		print s,
@@ -123,7 +129,12 @@ def main():
 	elif sys.argv[1] == 'bf':
 		abreArquivo()
 		buildListaPesos()
-		bf()
+		v = vertices[0]
+		bf(v)
+	elif sys.argv[1] == 'bfall':
+		abreArquivo()
+		buildListaPesos()
+		bfall()
 
 #
 if __name__ == "__main__":
