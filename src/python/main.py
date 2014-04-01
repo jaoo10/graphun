@@ -123,30 +123,44 @@ def printBF(s,v):
 
 def dfs():
 	global tempo
+	tempo = 0
 	global listaCores
 	listaCores = {}
 	for v in vertices:
 		listaCores[v] = 'branco'
-	tempo = 0
 	for v in vertices:
-		if listaCores[v] == 'branco'
+		if listaCores[v] == 'branco':
 			dfs_visit(v)
 
 def dfs_visit(u):
+	global tempo
 	tempo += 1
 	listaCores[u] = 'cinza'
+	global listaTempo
 	listaTempo = {}
 	for v in vertices:
 		listaTempo[v] = 0
-	listaDist[u] = tempo
+	listaTempo[u] = tempo
 	for v in listaAdj[u]:
 		if listaCores[v] == 'branco':
 			dfs_visit(v)
 	listaCores[u] = 'preto'
+	global topologica
+	topologica = deque()
+	topologica.appendleft(u)
 	tempo += 1
 	listaTempo[u] = tempo
 	
-			
+def grafo_transposto():
+	global gT
+	gT = {}
+	for u in vertices:
+		for v in listaAdj[u]
+			gT[v].append[u]
+
+def scc():
+	dfs()
+	grafo_transposto()
 	
 		
 	
