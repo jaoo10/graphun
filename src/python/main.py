@@ -162,7 +162,9 @@ def scc():
 	dfs()
 	grafo_transposto()
 	
-		
+
+def fw():
+	
 	
 
 def main():
