@@ -166,6 +166,7 @@ def scc():
 def fw():
 	
 	
+	
 
 def main():
 	if sys.argv[1] == 'bfs':
