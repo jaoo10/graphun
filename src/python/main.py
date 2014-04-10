@@ -226,7 +226,10 @@ def scc():
 	print top1
 	print top2
 	
-		
+
+def fw():
+	
+	
 	
 
 def main():
