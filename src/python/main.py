@@ -121,32 +121,83 @@ def printBF(s,v):
 		print v,
 
 
-def dfs():
+def fw():
+	global matriz
+	matriz = {}
+	for u in vertices:
+		for v in vertices:
+			matriz[u,v] = float("inf")
+	for v in vertices:
+		matriz[v,v] = 0
+	for u in vertices:
+		for v in vertices:
+			if (u != v) and (u,v) in listaPesos.keys():
+				matriz[u,v] = listaPesos[u,v]
+	buildListaProx()
+	for k in range(0,len(vertices)-1):
+		for i in range(0,len(vertices)-1):
+			for j in range(0,len(vertices)-1):
+				if i != j:
+					if matriz[vertices[i],vertices[j]] > matriz[vertices[i],vertices[k]] + matriz[vertices[k],vertices[j]]:
+						matriz[vertices[i],vertices[j]] = matriz[vertices[i],vertices[k]] + matriz[vertices[k],vertices[j]]
+						listaProx[vertices[i],vertices[j]] = listaProx[vertices[k],vertices[j]]
+	for u in vertices:
+		for v in vertices:
+			printFW(u,v)
+
+
+def buildListaProx():
+	global listaProx
+	listaProx = {}
+	for u in vertices:
+		for v in vertices:
+			listaProx[u,v] = None
+	for i in range(0,len(vertices)-1):
+		for j in range(0,len(vertices)-1):
+			if i == j or matriz[vertices[i],vertices[j]] == float("inf"):
+				listaProx[vertices[i],vertices[j]] = 0
+			else:
+				listaProx[vertices[i],vertices[j]] = vertices[i]
+	
+
+def printFW(u,v):
+	if u ==v or matriz[u,v] == float("inf"):
+		print " "
+	else:
+		caminho = listaProx[u,v]
+		if caminho == u:
+			print " "
+		else:
+			print str(printFW(u,caminho)) + caminho + str(printFW(caminho,v))
+
+
+def dfs(vertice,adj):
 	global tempo
+	global topologic
+	topologic = deque()
 	tempo = 0
 	global listaCores
 	listaCores = {}
-	for v in vertices:
+	for v in vertice:
 		listaCores[v] = 'branco'
-	for v in vertices:
+	for v in vertice:
 		if listaCores[v] == 'branco':
-			dfs_visit(v)
+			dfs_visit(v,vertice,adj,topologic)
+	
 
-def dfs_visit(u):
+def dfs_visit(u,vert,adja,topologica):
 	global tempo
 	tempo += 1
 	listaCores[u] = 'cinza'
 	global listaTempo
 	listaTempo = {}
-	for v in vertices:
+	for v in vert:
 		listaTempo[v] = 0
 	listaTempo[u] = tempo
-	for v in listaAdj[u]:
+	for v in adja[u]:
 		if listaCores[v] == 'branco':
-			dfs_visit(v)
+			dfs_visit(v,vert,adja,topologica)
 	listaCores[u] = 'preto'
-	global topologica
-	topologica = deque()
 	topologica.appendleft(u)
 	tempo += 1
 	listaTempo[u] = tempo
@@ -154,13 +205,26 @@ def dfs_visit(u):
 def grafo_transposto():
 	global gT
 	gT = {}
+	for v in vertices:
+		gT[v] = []
 	for u in vertices:
-		for v in listaAdj[u]
-			gT[v].append[u]
+		for v in listaAdj[u]:
+			gT[v].append(u)
 
 def scc():
-	dfs()
+	dfs(vertices,listaAdj)
+	top1 = topologic
 	grafo_transposto()
+	vertices2 = []
+	tempos = list(reversed(sorted(listaTempo.values())))
+	for t in tempos:
+		for v in vertices:
+			if t == listaTempo[v]:
+				vertices2.append(v)
+	dfs(vertices2,gT)
+	top2 = topologic
+	print top1
+	print top2
 	
 		
 	
@@ -179,6 +243,18 @@ def main():
 		abreArquivo()
 		buildListaPesos()
 		bfall()
+	elif sys.argv[1] == 'fw':
+		abreArquivo()
+		buildListaPesos()
+		fw()
+	elif sys.argv[1] == 'dfs':
+		abreArquivo()
+		buildListaAdj()
+		dfs(vertices,listaAdj)
+	elif sys.argv[1] == 'scc':
+		abreArquivo()
+		buildListaAdj()
+		scc()
 
 #
 if __name__ == "__main__":
