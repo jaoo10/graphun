@@ -124,53 +124,43 @@ def printBF(s,v):
 def fw():
 	global matriz
 	matriz = {}
+	global pred
+	pred = {}
 	for u in vertices:
 		for v in vertices:
 			matriz[u,v] = float("inf")
+			pred[u,v] = None
 	for v in vertices:
 		matriz[v,v] = 0
 	for u in vertices:
 		for v in vertices:
 			if (u != v) and (u,v) in listaPesos.keys():
 				matriz[u,v] = listaPesos[u,v]
-	buildListaProx()
-	for k in range(0,len(vertices)-1):
-		for i in range(0,len(vertices)-1):
-			for j in range(0,len(vertices)-1):
-				if i != j:
-					if matriz[vertices[i],vertices[j]] > matriz[vertices[i],vertices[k]] + matriz[vertices[k],vertices[j]]:
-						matriz[vertices[i],vertices[j]] = matriz[vertices[i],vertices[k]] + matriz[vertices[k],vertices[j]]
-						listaProx[vertices[i],vertices[j]] = listaProx[vertices[k],vertices[j]]
+	for k in range(0,len(vertices)):
+                for i in range(0,len(vertices)):
+                        for j in range(0,len(vertices)):
+                                if i != j:
+                                        if (matriz[vertices[i],vertices[j]] > matriz[vertices[i],vertices[k]] + matriz[vertices[k],vertices[j]]):
+                                                matriz[vertices[i],vertices[j]] = matriz[vertices[i],vertices[k]] + matriz[vertices[k],vertices[j]]
+                                                pred[vertices[i],vertices[j]] = vertices[k]
 	for u in vertices:
 		for v in vertices:
-			printFW(u,v)
+			if matriz[u,v] != float("inf"):
+				printFW(u,v),
+				print v,
+				print matriz[u,v]
 
-
-def buildListaProx():
-	global listaProx
-	listaProx = {}
-	for u in vertices:
-		for v in vertices:
-			listaProx[u,v] = None
-	for i in range(0,len(vertices)-1):
-		for j in range(0,len(vertices)-1):
-			if i == j or matriz[vertices[i],vertices[j]] == float("inf"):
-				listaProx[vertices[i],vertices[j]] = 0
-			else:
-				listaProx[vertices[i],vertices[j]] = vertices[i]
-	
 
 def printFW(u,v):
-	if u ==v or matriz[u,v] == float("inf"):
-		print " "
+	if pred[u,v] == None:
+		print u,
 	else:
-		caminho = listaProx[u,v]
-		if caminho == u:
-			print " "
-		else:
-			print str(printFW(u,caminho)) + caminho + str(printFW(caminho,v))
+		printFW(u, pred[u,v])
+		printFW(pred[u,v],v)
+		
+		
 
-
+			
 def dfs(vertice,adj):
 	global tempo
 	global topologic
