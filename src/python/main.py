@@ -1,5 +1,7 @@
 import sys
 from collections import deque 
+import heapq
+
 
 # Arquivo texto > listas
 # Faz a abertura do arquivo e armazena os valores dos vertices e das arestas, separadamente.
@@ -83,12 +85,9 @@ def bf(s):
 		else:
 			distancias[v] = float("inf")
 			predecessores[v] = None
-# relax(u,v,w)
 	for i in range(1,len(vertices)-1):
 		for a in arestas:
-			if distancias[a[0]] + listaPesos[a[0],a[1]] < distancias[a[1]]:
-				distancias[a[1]] = distancias[a[0]] + listaPesos[a[0],a[1]]
-				predecessores[a[1]] = a[0]
+			relax(a[0],a[1],listaPesos[a[0],a[1]])
 # checar para ciclos com peso negativo
 	for a in arestas:
 		if distancias[a[0]] + listaPesos[a[0],a[1]] < distancias[a[1]]:
@@ -100,6 +99,12 @@ def bf(s):
 			None
 		else:
 			print(distancias[v])
+
+def relax(u,v,w):
+	if distancias[u] + w < distancias[v]:
+		distancias[v] = distancias[u] + w
+		predecessores[v] = u
+
 
 # Grafo > caminhos
 # Algoritmo bf executado com cada vertice do grafo como origem. 
@@ -145,9 +150,12 @@ def fw():
                                                 pred[vertices[i],vertices[j]] = vertices[k]
 	for u in vertices:
 		for v in vertices:
-			if matriz[u,v] != float("inf"):
+			if matriz[u,v] != float("inf") and u != v:
 				printFW(u,v),
 				print v,
+				print matriz[u,v]
+			elif matriz[u,v] != float("inf"):
+				printFW(u,v),
 				print matriz[u,v]
 
 
@@ -215,9 +223,59 @@ def scc():
 	top2 = topologic
 	print top1
 	print top2
-	
+
+
+def dk():
+# initialize_single_source(G,s)
+        global predecessores
+        global distancias
+        distancias = {}
+        predecessores = {}
+	s = vertices[0]
+        for v in vertices:
+                if v == s:
+                        distancias[v] = 0
+                else:
+                        distancias[v] = float("inf")
+                        predecessores[v] = None
+	fila = deque()
+	for v in vertices:
+		fila.append(v)
+	while fila:
+		extract_min(fila,len(vertices)-1)
+		u = minimo
+		if fila.count(u) !=0:
+			fila.remove(u)
+		for a in listaAdj[u]:
+			relax(u,a,listaPesos[u,a])
+# exibir a saida
+        for v in vertices:
+                printBF(vertices[0],v)
+                if distancias[v] == float("inf"):
+                        None
+                else:
+                        print(distancias[v])
+
 
 	
+def extract_min(F,n):
+	global minimo
+	minimo = vertices[0]
+	vertices[0] = vertices[n]
+	n = n -1
+	i = vertices[0]
+	j = i
+	while 2*j <= n:
+		f = 2*j
+		if f < n and vertices[f] < vertices[f+1]:
+			f += 1
+		if vertices[j] >= vertices[f]:
+			j = n
+		else:
+			vertices[j],vertices[f] = vertices[f],vertices[j]
+			j = f
+	
+
 
 def main():
 	if sys.argv[1] == 'bfs':
@@ -245,6 +303,11 @@ def main():
 		abreArquivo()
 		buildListaAdj()
 		scc()
+	elif sys.argv[1] == 'dk':
+		abreArquivo()
+		buildListaAdj()
+		buildListaPesos()
+		dk()
 
 #
 if __name__ == "__main__":
