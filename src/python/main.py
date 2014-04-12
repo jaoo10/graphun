@@ -74,17 +74,7 @@ def printBFS(distancias):
 # O vertice de origem s e o primeiro vertice no arquivo de entrada.
 # Para cada vertice v acessivel a partir de s, uma linha deve ser escrita na saida contendo um caminho mais curto de s para v e o custo do caminho.
 def bf(s):
-# initialize_single_source(G,s)
-	global predecessores
-	global distancias
-	distancias = {}
-	predecessores = {}
-	for v in vertices:
-		if v == s:
-			distancias[v] = 0
-		else:
-			distancias[v] = float("inf")
-			predecessores[v] = None
+	initialize_single_source(s)
 	for i in range(1,len(vertices)-1):
 		for a in arestas:
 			relax(a[0],a[1],listaPesos[a[0],a[1]])
@@ -99,6 +89,20 @@ def bf(s):
 			None
 		else:
 			print(distancias[v])
+
+def initialize_single_source(s):
+	global predecessores
+	global distancias
+	distancias = {}
+	predecessores = {}
+	for v in vertices:
+		if v == s:
+			distancias[v] = 0
+		else:
+			distancias[v] = float("inf")
+			predecessores[v] = None
+
+
 
 def relax(u,v,w):
 	if distancias[u] + w < distancias[v]:
@@ -181,6 +185,7 @@ def dfs(vertice,adj):
 	for v in vertice:
 		if listaCores[v] == 'branco':
 			dfs_visit(v,vertice,adj,topologic)
+			
 	
 
 def dfs_visit(u,vert,adja,topologica):
@@ -221,60 +226,40 @@ def scc():
 				vertices2.append(v)
 	dfs(vertices2,gT)
 	top2 = topologic
-	print top1
 	print top2
 
 
-def dk():
-# initialize_single_source(G,s)
-        global predecessores
-        global distancias
-        distancias = {}
-        predecessores = {}
-	s = vertices[0]
-        for v in vertices:
-                if v == s:
-                        distancias[v] = 0
-                else:
-                        distancias[v] = float("inf")
-                        predecessores[v] = None
+def dk(s):
+	initialize_single_source(s)
 	fila = deque()
+	S = deque()
 	for v in vertices:
 		fila.append(v)
 	while fila:
-		extract_min(fila,len(vertices)-1)
-		u = minimo
-		if fila.count(u) !=0:
-			fila.remove(u)
+		u = extract_min(fila)
+		S.append(u)
 		for a in listaAdj[u]:
 			relax(u,a,listaPesos[u,a])
+		fila.remove(u)
 # exibir a saida
         for v in vertices:
-                printBF(vertices[0],v)
+                printBF(s,v)
                 if distancias[v] == float("inf"):
                         None
                 else:
                         print(distancias[v])
-
-
 	
-def extract_min(F,n):
-	global minimo
-	minimo = vertices[0]
-	vertices[0] = vertices[n]
-	n = n -1
-	i = vertices[0]
-	j = i
-	while 2*j <= n:
-		f = 2*j
-		if f < n and vertices[f] < vertices[f+1]:
-			f += 1
-		if vertices[j] >= vertices[f]:
-			j = n
-		else:
-			vertices[j],vertices[f] = vertices[f],vertices[j]
-			j = f
-	
+
+def extract_min(F):
+	minimo = F[0]
+	for f in F:
+		if distancias[f] < distancias[minimo]:
+			minimo = f
+	return minimo
+
+def dkall():
+	for v in vertices:
+		dk(v)
 
 
 def main():
@@ -307,7 +292,13 @@ def main():
 		abreArquivo()
 		buildListaAdj()
 		buildListaPesos()
-		dk()
+		s = vertices[0]
+		dk(s)
+	elif sys.argv[1] == 'dkall':
+		abreArquivo()
+		buildListaAdj()
+		buildListaPesos()
+		dkall()
 
 #
 if __name__ == "__main__":
