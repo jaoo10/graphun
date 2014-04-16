@@ -1,15 +1,23 @@
-s
-t
-x
-y
-z
+a
+b
+c
+d
+e
+f
+g
+h
 #
-s t 6
-s y 7
-t x 5
-t y 8
-t z -4
-x t -2
-y x -3
-y z 9
-z x 7
+a b
+b c
+b e
+b f
+c d
+c g
+d c
+d h
+e a
+e f
+f g
+g f
+g h
+h h

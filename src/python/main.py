@@ -197,7 +197,7 @@ def dfs_visit(u,vert,adja,topologica):
 	for v in vert:
 		listaTempo[v] = 0
 	listaTempo[u] = tempo
-	for v in adja[u]:
+	for v in adja[u] and type(v) != int:
 		if listaCores[v] == 'branco':
 			dfs_visit(v,vert,adja,topologica)
 	listaCores[u] = 'preto'
@@ -214,7 +214,9 @@ def grafo_transposto():
 		for v in listaAdj[u]:
 			gT[v].append(u)
 
-def scc():
+
+# Esta comentado porque o algoritmo esta incompleto
+"""def scc():
 	dfs(vertices,listaAdj)
 	top1 = topologic
 	grafo_transposto()
@@ -225,8 +227,13 @@ def scc():
 			if t == listaTempo[v]:
 				vertices2.append(v)
 	dfs(vertices2,gT)
+	tempos2 = list(reversed(sorted(listaTempo.values())))
 	top2 = topologic
-	print top2
+	for t in tempos2:
+		listaCores[t] = 'branco'
+		dfs_visit(t,tempos2,gT,top2)
+		top3 = topologic
+		print top3"""
 
 
 def dk(s):
